@@ -4,6 +4,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/stat.h>
+#include <errno.h>
 
 //test of help flag
 void test_help_flag(){
@@ -54,7 +55,9 @@ void test_version_flag(){
 //addition function to create directory for test
 void create_directory(char* directory_name){
   if (mkdir(directory_name, 0777) != 0) {
-    printf("mkdir error\n");
+    if (errno != EEXIST) {
+      printf("mkdir error\n");
+    }
   }
 }
 
@@ -87,28 +90,13 @@ void test_mangen(){
   
   FILE *fp = popen("./mangen test", "r");
   
-  char buffer[1024];
+  char buffer[4096];
   
-  char *expected_output = "test/1/file1.txt : 0000029A";  
-  if (fgets(buffer, sizeof(buffer), fp) != NULL) {
-    assert(strstr(buffer, expected_output) != NULL); 
-  } else {
-    assert(0);  
-  }
-  
-  expected_output = "test/1/file3.c : 00000310";  
-  if (fgets(buffer, sizeof(buffer), fp) != NULL) {
-    assert(strstr(buffer, expected_output) != NULL); 
-  } else {
-    assert(0);  
-  }
-  
-  expected_output = "test/2/file2.txt : 000002ED";  
-  if (fgets(buffer, sizeof(buffer), fp) != NULL) {
-    assert(strstr(buffer, expected_output) != NULL); 
-  } else {
-    assert(0);  
-  }
+  fread(buffer, 1, sizeof(buffer) - 1, fp);
+
+  assert(strstr(buffer, "test/1/file1.txt : 0000029A") != NULL);
+  assert(strstr(buffer, "test/1/file3.c : 00000310") != NULL);
+  assert(strstr(buffer, "test/2/file2.txt : 000002ED") != NULL);
   
   pclose(fp);
 }

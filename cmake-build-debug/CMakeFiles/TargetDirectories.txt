@@ -1,5 +1,0 @@
-/Users/artemakulov/Study/2 course/2 sem/Kaspersky/mangen/cmake-build-debug/CMakeFiles/mangen.dir
-/Users/artemakulov/Study/2 course/2 sem/Kaspersky/mangen/cmake-build-debug/CMakeFiles/tests.dir
-/Users/artemakulov/Study/2 course/2 sem/Kaspersky/mangen/cmake-build-debug/CMakeFiles/test.dir
-/Users/artemakulov/Study/2 course/2 sem/Kaspersky/mangen/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/artemakulov/Study/2 course/2 sem/Kaspersky/mangen/cmake-build-debug/CMakeFiles/rebuild_cache.dir
